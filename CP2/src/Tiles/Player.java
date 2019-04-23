@@ -1,5 +1,6 @@
 package Tiles;
 
+import Tiles.Creature;
 import graphics.Animation;
 
 /**

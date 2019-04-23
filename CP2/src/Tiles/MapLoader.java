@@ -23,16 +23,15 @@ public class MapLoader
 
     // host sprites used for cloning
     private Sprite playerSprite;
-    private Sprite goalSprite;
+    //private Sprite goalSprite;
 
 
     /**
-        Creates a new ResourceManager with the specified
-        GraphicsConfiguration.
+        Creates a new ResourceManager
     */
-    public MapLoader(GraphicsConfiguration gc) 
+    public MapLoader() 
     {
-        this.gc = gc;
+        
         loadTileImages();
         loadCreatureSprites();
     }
@@ -85,46 +84,7 @@ public class MapLoader
     }
 
 
-    public TileMap loadNextMap() 
-    {
-        TileMap map = null;
-        while (map == null) 
-        {
-            currentMap++;
-            try {
-                map = loadMap(
-                    "maps/map" + currentMap + ".txt");
-            }
-            catch (IOException ex) 
-            {
-                if (currentMap == 2) 
-                {
-                    // no maps to load!
-                    return null;
-                }
-                  currentMap = 0;
-                map = null;
-            }
-        }
-
-        return map;
-    }
-
-
-    public TileMap reloadMap() 
-    {
-        try {
-            return loadMap(
-                "maps/map" + currentMap + ".txt");
-        }
-        catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-    }
-
-
-    private TileMap loadMap(String filename)
+    public TileMap loadMap(String filename)
         throws IOException
     {
         ArrayList lines = new ArrayList();
@@ -164,9 +124,9 @@ public class MapLoader
                 }
 
                 
-                else if (ch == '*') {
-                    addSprite(newMap, goalSprite, x, y);
-                }
+//                else if (ch == '*') {
+//                    addSprite(newMap, goalSprite, x, y);
+                //}
                
             }
         }
@@ -182,28 +142,28 @@ public class MapLoader
     }
 
 
-    private void addSprite(TileMap map,
-        Sprite hostSprite, int tileX, int tileY)
-    {
-        if (hostSprite != null) {
-            // clone the sprite from the "host"
-            Sprite sprite = (Sprite)hostSprite.clone();
-
-            // center the sprite
-            sprite.setX(
-                TileMapDrawer.tilesToPixels(tileX) +
-                (TileMapDrawer.tilesToPixels(1) -
-                sprite.getWidth()) / 2);
-
-            // bottom-justify the sprite
-            sprite.setY(
-                TileMapDrawer.tilesToPixels(tileY + 1) -
-                sprite.getHeight());
-
-            // add it to the map
-            map.addSprite(sprite);
-        }
-    }
+//    private void addSprite(TileMap map,
+//        Sprite hostSprite, int tileX, int tileY)
+//    {
+//        if (hostSprite != null) {
+//            // clone the sprite from the "host"
+//            Sprite sprite = (Sprite)hostSprite.clone();
+//
+//            // center the sprite
+//            sprite.setX(
+//                TileMapDrawer.tilesToPixels(tileX) +
+//                (TileMapDrawer.tilesToPixels(1) -
+//                sprite.getWidth()) / 2);
+//
+//            // bottom-justify the sprite
+//            sprite.setY(
+//                TileMapDrawer.tilesToPixels(tileY + 1) -
+//                sprite.getHeight());
+//
+//            // add it to the map
+//            map.addSprite(sprite);
+//        }
+//    }
 
 
     // -----------------------------------------------------------
@@ -270,7 +230,7 @@ public class MapLoader
         // create "goal" sprite
         Animation anim = new Animation();
         anim.addFrame(loadImage("heart.png"), 150);
-        goalSprite = new PowerUp.Goal(anim);
+        //goalSprite = new PowerUp.Goal(anim);
 
     }
 

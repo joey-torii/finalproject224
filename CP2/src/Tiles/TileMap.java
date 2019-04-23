@@ -9,13 +9,12 @@ import graphics.Sprite;
 /**
     The TileMap class contains the data for a tile-based
     map, including Sprites. Each tile is a reference to an
-    Image. Of course, Images are used multiple times in the tile
-    map.
+    Image. 
 */
 public class TileMap {
 
     private Image[][] tiles;
-    private LinkedList sprites;
+    //private LinkedList sprites;
     private Sprite player;
 
     /**
@@ -24,7 +23,7 @@ public class TileMap {
     */
     public TileMap(int width, int height) {
         tiles = new Image[width][height];
-        sprites = new LinkedList();
+        //sprites = new LinkedList();
     }
 
 
@@ -85,28 +84,28 @@ public class TileMap {
     }
 
 
-    /**
-        Adds a Sprite object to this map.
-    */
-    public void addSprite(Sprite sprite) {
-        sprites.add(sprite);
-    }
+//    /**
+//        Adds a Sprite object to this map.
+//    */
+//    public void addSprite(Sprite sprite) {
+//        sprites.add(sprite);
+//    }
+//
+//
+//    /**
+//        Removes a Sprite object from this map.
+//    */
+//    public void removeSprite(Sprite sprite) {
+//        sprites.remove(sprite);
+//    }
 
 
-    /**
-        Removes a Sprite object from this map.
-    */
-    public void removeSprite(Sprite sprite) {
-        sprites.remove(sprite);
-    }
-
-
-    /**
-        Gets an Iterator of all the Sprites in this map,
-        excluding the player Sprite.
-    */
-    public Iterator getSprites() {
-        return sprites.iterator();
-    }
+//    /**
+//        Gets an Iterator of all the Sprites in this map,
+//        excluding the player Sprite.
+//    */
+//    public Iterator getSprites() {
+//        return sprites.iterator();
+//    }
 
 }

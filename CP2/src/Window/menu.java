@@ -4,6 +4,9 @@ package Window;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -26,7 +29,7 @@ public class menu {
                 JButton lv1 = new JButton(new ImageIcon("images/lv1.PNG"));
                 lv1.addActionListener(new ActionListener(){
                     public void actionPerformed(ActionEvent e){
-                        JFrame LEVEL_ONE = new JFrame("Lv.1");
+                       level1 lv1 = new level1();
                         
                         lv1.setSize(1300,700);
                         
@@ -52,7 +55,18 @@ public class menu {
         Quit.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                System.exit(0);
+                JFrame options = new JFrame("images/");
+                JLabel question =  new JLabel("Are you ugly?");
+                JButton yes = new JButton("images/sad_yes.png");
+                JButton no = new JButton("images/no.png");
+                no.addActionListener(new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent e){
+                        System.exit(0);
+                    }
+                
+                });
+                
             }
         });
         
