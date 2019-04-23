@@ -1,5 +1,6 @@
 package Window;
 
+//import Textures.Level1;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,23 +14,23 @@ public class menu {
     
     public static void main (String [] ags){
         final JFrame menu = new JFrame("menu");
-        JLabel title = new JLabel(new ImageIcon("portal.PNG"));
-        JButton Start = new JButton(new ImageIcon("start.PNG"));
-        JButton Quit = new JButton(new ImageIcon("quit.PNG"));
+        JLabel title = new JLabel(new ImageIcon("images/portal.PNG"));
+        JButton Start = new JButton(new ImageIcon("images/start.PNG"));
+        JButton Quit = new JButton(new ImageIcon("images/quit.PNG"));
         
         Start.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                final JFrame levels = new JFrame("Levels");
-                JLabel level = new JLabel(new ImageIcon("levels.PNG"));
-                JButton lv1 = new JButton(new ImageIcon("lv1.PNG"));
+                final JFrame levels = new JFrame("images/Levels");
+                JLabel level = new JLabel(new ImageIcon("images/levels.PNG"));
+                JButton lv1 = new JButton(new ImageIcon("images/lv1.PNG"));
                 lv1.addActionListener(new ActionListener(){
                     public void actionPerformed(ActionEvent e){
-                        JFrame lv1 = new JFrame("Lv.1");
+                        JFrame LEVEL_ONE = new JFrame("Lv.1");
                         
                         lv1.setSize(1300,700);
                         
-                        lv1.getContentPane().setBackground(Color.white);
+                        //lv1.getContentPane().setBackground(Color.white);
                         lv1.setVisible(true);
                         levels.setVisible(false);
                     }
