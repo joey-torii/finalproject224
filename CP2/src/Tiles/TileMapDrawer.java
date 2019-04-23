@@ -30,12 +30,12 @@ public class TileMapDrawer
 
     private Image background;
 
-//    /**
-//        Converts a pixel position to a tile position.
-//    */
-//    public static int pixelsToTiles(float pixels) {
-//        return pixelsToTiles(Math.round(pixels));
-//    }
+    /**
+        Converts a pixel position to a tile position.
+    */
+    public static int pixelsToTiles(float pixels) {
+        return pixelsToTiles(Math.round(pixels));
+    }
 
 
     /**
@@ -84,14 +84,6 @@ public class TileMapDrawer
         int offsetY = Height -
             tilesToPixels(map.getHeight());
 
-        // draw black background, if needed
-        if (background == null ||
-            Height > background.getHeight(null))
-        {
-            g.setColor(Color.black);
-            g.fillRect(0, 0, Width, Height);
-        }
-
         // draw parallax background image
         if (background != null) {
             int x = offsetX *
@@ -124,22 +116,6 @@ public class TileMapDrawer
             Math.round(player.getX()) + offsetX,
             Math.round(player.getY()) + offsetY,
             null);
-
-//        // draw sprites
-//        //Iterator i = map.getSprites();
-//        while (i.hasNext()) {
-//            Sprite sprite = (Sprite)i.next();
-//            int x = Math.round(sprite.getX()) + offsetX;
-//            int y = Math.round(sprite.getY()) + offsetY;
-//            g.drawImage(sprite.getImage(), x, y, null);
-
-//            // wake up the creature when it's on screen
-//            if (sprite instanceof Creature &&
-//                x >= 0 && x < Width)
-//            {
-//                ((Creature)sprite).wakeUp();
-//            }
-       // }
     }
 
 }

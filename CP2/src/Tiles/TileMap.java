@@ -14,7 +14,7 @@ import graphics.Sprite;
 public class TileMap {
 
     private Image[][] tiles;
-    //private LinkedList sprites;
+    private LinkedList sprites;
     private Sprite player;
 
     /**
@@ -84,20 +84,20 @@ public class TileMap {
     }
 
 
-//    /**
-//        Adds a Sprite object to this map.
-//    */
-//    public void addSprite(Sprite sprite) {
-//        sprites.add(sprite);
-//    }
-//
-//
-//    /**
-//        Removes a Sprite object from this map.
-//    */
-//    public void removeSprite(Sprite sprite) {
-//        sprites.remove(sprite);
-//    }
+    /**
+        Adds a Sprite object to this map.
+    */
+    public void addSprite(Sprite sprite) {
+        sprites.add(sprite);
+    }
+
+
+    /**
+        Removes a Sprite object from this map.
+    */
+    public void removeSprite(Sprite sprite) {
+        sprites.remove(sprite);
+    }
 
 
 //    /**

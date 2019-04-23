@@ -29,9 +29,9 @@ public class MapLoader
     /**
         Creates a new ResourceManager
     */
-    public MapLoader() 
+    public MapLoader(GraphicsConfiguration gc) 
     {
-        
+        this.gc = gc;
         loadTileImages();
         loadCreatureSprites();
     }
@@ -62,7 +62,8 @@ public class MapLoader
     private Image getScaledImage(Image image, float x, float y) 
     {
 
-        // set up the transform
+        // set up the transform to help correct gemoetric distortions similar to normalizng data
+        //read about theory at https://www.mathworks.com/discovery/affine-transformation.html
         AffineTransform transform = new AffineTransform();
         transform.scale(x, y);
         transform.translate(
@@ -85,8 +86,7 @@ public class MapLoader
 
 
     public TileMap loadMap(String filename)
-        throws IOException
-    {
+        throws IOException {
         ArrayList lines = new ArrayList();
         int width = 0;
         int height = 0;
@@ -123,7 +123,7 @@ public class MapLoader
                     newMap.setTile(x, y, (Image)tiles.get(tile));
                 }
 
-                
+//eventually going to be used to create goal sprite to signal the end of th elevel                
 //                else if (ch == '*') {
 //                    addSprite(newMap, goalSprite, x, y);
                 //}
@@ -142,28 +142,28 @@ public class MapLoader
     }
 
 
-//    private void addSprite(TileMap map,
-//        Sprite hostSprite, int tileX, int tileY)
-//    {
-//        if (hostSprite != null) {
-//            // clone the sprite from the "host"
-//            Sprite sprite = (Sprite)hostSprite.clone();
-//
-//            // center the sprite
-//            sprite.setX(
-//                TileMapDrawer.tilesToPixels(tileX) +
-//                (TileMapDrawer.tilesToPixels(1) -
-//                sprite.getWidth()) / 2);
-//
-//            // bottom-justify the sprite
-//            sprite.setY(
-//                TileMapDrawer.tilesToPixels(tileY + 1) -
-//                sprite.getHeight());
-//
-//            // add it to the map
-//            map.addSprite(sprite);
-//        }
-//    }
+    private void addSprite(TileMap map,
+        Sprite hostSprite, int tileX, int tileY)
+    {
+        if (hostSprite != null) {
+            // clone the sprite from the "host"
+            Sprite sprite = (Sprite)hostSprite.clone();
+
+            // center the sprite
+            sprite.setX(
+                TileMapDrawer.tilesToPixels(tileX) +
+                (TileMapDrawer.tilesToPixels(1) -
+                sprite.getWidth()) / 2);
+
+            // bottom-justify the sprite
+            sprite.setY(
+                TileMapDrawer.tilesToPixels(tileY + 1) -
+                sprite.getHeight());
+
+            // add it to the map
+            map.addSprite(sprite);
+        }
+    }
 
 
     // -----------------------------------------------------------
@@ -173,8 +173,8 @@ public class MapLoader
 
     public void loadTileImages()
     {
-        // keep looking for tile A,B,C, etc. this makes it
-        // easy to drop new tiles in the images/ directory
+        // keep looking for tile A,B,C, etc. allows for easy level design
+        //in a .txt document
         tiles = new ArrayList();
         char ch = 'A';
         
@@ -203,17 +203,12 @@ public class MapLoader
         };
 
         images[1] = new Image[images[0].length];
-        images[2] = new Image[images[0].length];
-        images[3] = new Image[images[0].length];
         
         for (int i=0; i<images[0].length; i++) 
         {
             // right-facing images
             images[1][i] = getMirrorImage(images[0][i]);
-            // left-facing "dead" images
-            images[2][i] = getFlippedImage(images[0][i]);
-            // right-facing "dead" images
-            images[3][i] = getFlippedImage(images[1][i]);
+     
         }
 
         // create creature animations
@@ -226,7 +221,7 @@ public class MapLoader
         }
 
         // create creature sprites
-        playerSprite = new Player (playerAnim[0], playerAnim[1],playerAnim[2], playerAnim[3]);
+        playerSprite = new Player (playerAnim[0], playerAnim[1]);
         // create "goal" sprite
         Animation anim = new Animation();
         anim.addFrame(loadImage("heart.png"), 150);

@@ -8,13 +8,15 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import cp2.GameEngine;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  *
  * @author jetor
  */
-public class menu {
-    
+public class menu extends GameEngine{
+   //GameEngine level1 = new GameEngine().run();
     public static void main (String [] ags){
         final JFrame menu = new JFrame("menu");
         JLabel title = new JLabel(new ImageIcon("images/portal.PNG"));
@@ -29,13 +31,13 @@ public class menu {
                 JButton lv1 = new JButton(new ImageIcon("images/lv1.PNG"));
                 lv1.addActionListener(new ActionListener(){
                     public void actionPerformed(ActionEvent e){
-                       level1 lv1 = new level1();
-                        
-                        lv1.setSize(1300,700);
-                        
-                        //lv1.getContentPane().setBackground(Color.white);
-                        lv1.setVisible(true);
-                        levels.setVisible(false);
+                        GameEngine level1;
+                        level1 = new GameEngine();
+                        try {
+                            level1.run();
+                        } catch (InvocationTargetException ex) {
+                            Logger.getLogger(menu.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                 });
                 

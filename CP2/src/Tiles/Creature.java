@@ -14,30 +14,22 @@ public abstract class Creature extends Sprite {
     /**
         Amount of time to go from STATE_DYING to STATE_DEAD.
     */
-    private static final int DIE_TIME = 1000;
 
     public static final int STATE_NORMAL = 0;
-    public static final int STATE_DYING = 1;
-    public static final int STATE_DEAD = 2;
 
     private Animation left;
     private Animation right;
-    private Animation deadLeft;
-    private Animation deadRight;
     private int state;
     private long stateTime;
 
     /**
         Creates a new Creature with the specified Animations.
     */
-    public Creature(Animation left, Animation right,
-        Animation deadLeft, Animation deadRight)
+    public Creature(Animation left, Animation right)
     {
         super(right);
         this.left = left;
         this.right = right;
-        this.deadLeft = deadLeft;
-        this.deadRight = deadRight;
         state = STATE_NORMAL;
     }
 
@@ -49,8 +41,6 @@ public abstract class Creature extends Sprite {
             return constructor.newInstance(new Object[] {
                 (Animation)left.clone(),
                 (Animation)right.clone(),
-                (Animation)deadLeft.clone(),
-                (Animation)deadRight.clone()
             });
         }
         catch (Exception ex) {
@@ -97,25 +87,23 @@ public abstract class Creature extends Sprite {
         if (this.state != state) {
             this.state = state;
             stateTime = 0;
-            if (state == STATE_DYING) {
-                setVelocityX(0);
-                setVelocityY(0);
-            }
+            
         }
     }
 
 
-    /**
+     /**
         Checks if this creature is alive.
     */
     public boolean isAlive() {
         return (state == STATE_NORMAL);
     }
-
-
    
 
-
+    public boolean isFlying() {
+        return false;
+    }
+    
     /**
         Called before update() if the creature collided with a
         tile horizontally.
@@ -146,12 +134,8 @@ public abstract class Creature extends Sprite {
         else if (getVelocityX() > 0) {
             newAnim = right;
         }
-        if (state == STATE_DYING && newAnim == left) {
-            newAnim = deadLeft;
-        }
-        else if (state == STATE_DYING && newAnim == right) {
-            newAnim = deadRight;
-        }
+       
+        
 
         // update the Animation
         if (anim != newAnim) {
@@ -164,9 +148,6 @@ public abstract class Creature extends Sprite {
 
         // update to "dead" state
         stateTime += elapsedTime;
-        if (state == STATE_DYING && stateTime >= DIE_TIME) {
-            setState(STATE_DEAD);
-        }
     }
 
 }

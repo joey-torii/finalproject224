@@ -5,17 +5,15 @@
  */
 package Window;
 import Tiles.*;
+import graphics.*;
 import graphics.Sprite;
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Point;
+import java.awt.*;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Iterator;
 import javax.swing.JFrame;
-import graphics.*;
-import Tiles.*;
-import java.awt.Graphics;
+import java.lang.Object.*;
 
 /**
  *
@@ -30,21 +28,29 @@ public class level_one extends JFrame{
     private TileMap map;
     private MapLoader mapLoader;
     private TileMapDrawer drawer;
+    protected ScreenManager screen;
+    
     public boolean isRunning = true;
     public int Height = 700;
     public int Width = 1300;
     
+    public void run(){
+ 
+    }
     public void update(Long elapsedTime){
         //nothing
     }
     
     public level_one() throws IOException {
         
-        mapLoader = new MapLoader();
+        //start the resource manager
+        mapLoader = new MapLoader(screen.getFullScreenWindow().getGraphicsConfiguration());
         
+        //load up the map drawer
         drawer = new TileMapDrawer();
         drawer.setBackground(mapLoader.loadImage("background.jpg"));
         
+        //load the first map
         map = mapLoader.loadMap("map1.txt");
         
     }
@@ -66,6 +72,8 @@ public class level_one extends JFrame{
             drawer.draw((Graphics2D) g, map, Width, Height);
             g.dispose();
         }
+        
+        screen.restoreScreen();
     }
     
 //     public void draw(Graphics2D g) {
@@ -167,28 +175,28 @@ public class level_one extends JFrame{
             creature.setVelocityY(creature.getVelocityY() + GRAVITY * elapsedTime);
             
             // change x
-        float dx = creature.getVelocityX();
-        float oldX = creature.getX();
-        float newX = oldX + dx * elapsedTime;
-        Point tile =
-                getTileCollision(creature, newX, creature.getY());
-        if (tile == null) {
-            creature.setX(newX);
-        } else {
-            // line up with the tile boundary
-            if (dx > 0) {
-                creature.setX(
+            float dx = creature.getVelocityX();
+            float oldX = creature.getX();
+            float newX = oldX + dx * elapsedTime;
+            Point tile =
+                    getTileCollision(creature, newX, creature.getY());
+            if (tile == null) {
+                creature.setX(newX);
+            } else {
+                // line up with the tile boundary
+                if (dx > 0) {
+                    creature.setX(
                         TileMapDrawer.tilesToPixels(tile.x) -
                         creature.getWidth());
-            } else if (dx < 0) {
-                creature.setX(
+                } else if (dx < 0) {
+                    creature.setX(
                         TileMapDrawer.tilesToPixels(tile.x + 1));
-            }
+                }
             creature.collideHorizontal();
             
             // change y
-        float dy = creature.getVelocityY();
-        float oldY = creature.getY();
+            float dy = creature.getVelocityY();
+            float oldY = creature.getY();
         float newY = oldY + dy * elapsedTime;
         tile = getTileCollision(creature, creature.getX(), newY);
         if (tile == null) {

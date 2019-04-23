@@ -13,9 +13,9 @@ public class Player extends Creature
 
     private boolean onGround;
 
-    public Player(Animation left, Animation right, Animation deadLeft, Animation deadRight)
+    public Player(Animation left, Animation right)
     {
-        super(left, right, deadLeft, deadRight);
+        super(left, right);
     }
 
 

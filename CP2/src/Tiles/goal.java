@@ -4,11 +4,11 @@ import java.lang.reflect.Constructor;
 import graphics.*;
 
 /**
-    A PowerUp class is a Sprite that the player can pick up.
+    A goal class is a Sprite that the player can pick up.
 */
-public abstract class PowerUp extends Sprite {
+public abstract class goal extends Sprite {
 
-    public PowerUp(Animation anim) {
+    public goal(Animation anim) {
         super(anim);
     }
 
@@ -30,7 +30,7 @@ public abstract class PowerUp extends Sprite {
     /**
         A Goal PowerUp. Advances to the next map.
     */
-    public static class Goal extends PowerUp {
+    public static class Goal extends goal {
         public Goal(Animation anim) {
             super(anim);
         }
