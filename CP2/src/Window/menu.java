@@ -35,12 +35,12 @@ public class menu extends GameEngine{
                         level1.add(new board());
                         
                         level1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        level1.setSize(1300, 700);
+                        level1.setSize(1000, 700);
                         level1.setVisible(true);
                     }
                 });
                 
-                levels.setSize(1300, 700);
+                levels.setSize(1000, 700);
                 level.setBounds(50, 0, 300, 200);
                 lv1.setBounds(50, 200, 100, 100);
                 

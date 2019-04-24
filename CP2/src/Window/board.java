@@ -41,8 +41,9 @@ public class board extends JPanel implements ActionListener {
         super.paint(g);
         Graphics2D g2d = (Graphics2D) g;
         
+        g2d.drawImage(img, 685-p.nx2, 0, null);
         g2d.drawImage(p.getImage(), p.getX(), p.getY(), null);
-        g2d.drawImage(img, 0, 0, null);
+       
     }
     
     private class ActionListener extends KeyAdapter{

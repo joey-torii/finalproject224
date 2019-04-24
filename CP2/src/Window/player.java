@@ -20,6 +20,8 @@ import javax.swing.ImageIcon;
 public class player {
     int x, dx;
     int y, dy;
+    int dyy;
+    int nx2 = 1250;
     Image still;
     
     public player(){
@@ -31,9 +33,11 @@ public class player {
     
     public void move(){
         x = x+dx;
+        nx2 = nx2 + dx;
     }
     
     public void jump(){
+        dyy = y + 5;
         y = y+dy;
     }
     
@@ -58,18 +62,26 @@ public class player {
         if (key == KeyEvent.VK_D)
             dx = 1;
         
+        if(key == KeyEvent.VK_UP){
+            while(y < dyy){
+                dy = 1;
+            }
+        }
         
     }
     
     public void keyReleased(KeyEvent e){
         int key = e.getKeyCode();
         
-        if (key == KeyEvent.VK_A)
+        if (key == KeyEvent.VK_LEFT)
             dx = 0;
         
-        if (key == KeyEvent.VK_D)
+        if (key == KeyEvent.VK_RIGHT)
             dx = 0;
-        
-        
+        if (key == KeyEvent.VK_UP){
+            while (dyy <= y-5){
+                dy = -1;
+            }
+        }
     }
 }
