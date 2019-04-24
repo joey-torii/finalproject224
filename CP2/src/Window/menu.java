@@ -31,13 +31,12 @@ public class menu extends GameEngine{
                 JButton lv1 = new JButton(new ImageIcon("images/lv1.PNG"));
                 lv1.addActionListener(new ActionListener(){
                     public void actionPerformed(ActionEvent e){
-                        GameEngine level1;
-                        level1 = new GameEngine();
-                        try {
-                            level1.run();
-                        } catch (InvocationTargetException ex) {
-                            Logger.getLogger(menu.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+                        final JFrame level1 = new JFrame("Level 1");
+                        level1.add(new board());
+                        
+                        level1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        level1.setSize(1300, 700);
+                        level1.setVisible(true);
                     }
                 });
                 
