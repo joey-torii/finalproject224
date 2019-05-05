@@ -1,88 +1,93 @@
-package Window;
+package window;
 
-//import Textures.Level1;
+/*
+
+*/
+
+
+
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.*;
-import cp2.GameEngine;
-import java.lang.reflect.InvocationTargetException;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author jetor
- */
-public class menu extends GameEngine{
-   //GameEngine level1 = new GameEngine().run();
-    public static void main (String [] ags){
-        final JFrame menu = new JFrame("menu");
-        JLabel title = new JLabel(new ImageIcon("images/portal.PNG"));
-        JButton Start = new JButton(new ImageIcon("images/start.PNG"));
-        JButton Quit = new JButton(new ImageIcon("images/quit.PNG"));
+public class menu {
+    public static Rectangle playButton = new Rectangle(250, 200, 100, 37);
+    public static Rectangle quitButton = new Rectangle(250, 250, 100, 37);
+    public static Rectangle profile = new Rectangle(470,40,100, 37);
+    //final JButton Profile = new JButton(new ImageIcon("profile.PNG"));
+    private JButton profileButton;
+    
+    
+    public static void render(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+
+        Font fnt0 = new Font("arial", Font.BOLD, 45);
+        Font fnt1 = new Font("arial", Font.BOLD, 30);
+        Font fnt2 = new Font("arial", Font.BOLD, 15);
+        g.setFont(fnt0);
+        g.setColor(Color.black);
+        g.drawString("Crappy Portal", 150, 100);
+       
+        g.setFont(fnt1);
+        g.drawString("Play", playButton.x + 20, playButton.y + 30);
+            g2d.draw(playButton);
+        g.drawString("Quit", quitButton.x + 20, quitButton.y + 30);
+            g2d.draw(quitButton);
         
-        Start.addActionListener(new ActionListener(){
-            @Override
+        g.setFont(fnt2);
+        g.drawString("Profile", 470, 30);
+    }
+    /*
+    public static void main(String [] ags){
+        Profile.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                final JFrame levels = new JFrame("images/Levels");
-                JLabel level = new JLabel(new ImageIcon("images/levels.PNG"));
-                JButton lv1 = new JButton(new ImageIcon("images/lv1.PNG"));
-                lv1.addActionListener(new ActionListener(){
-                    public void actionPerformed(ActionEvent e){
-                        final JFrame level1 = new JFrame("Level 1");
-                        level1.add(new board());
-                        
-                        level1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        level1.setSize(1000, 700);
-                        level1.setVisible(true);
-                    }
-                });
-                
-                levels.setSize(1000, 700);
-                level.setBounds(50, 0, 300, 200);
-                lv1.setBounds(50, 200, 100, 100);
-                
-                levels.add(level);
-                levels.add(lv1);
-                levels.getContentPane().setBackground(Color.white);
-                levels.setLayout(null);
-                levels.setVisible(true);
-                menu.setVisible(false); 
+                String profile;
+                JLabel name;
+
+                profile = JOptionPane.showInputDialog("Profile");
+                name = new JLabel(profile);
+                name.setFont(new Font("Arial Black", Font.BOLD, 36));
+                menu.add(name);
+                name.setBounds(1100, 20, 160, 50);
+                Profile.setVisible(false);
             }
         });
+    }*/
+    
+    public menu(){
         
-        Quit.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e){
-                JFrame options = new JFrame("images/");
-                JLabel question =  new JLabel("Are you ugly?");
-                JButton yes = new JButton("images/sad_yes.png");
-                JButton no = new JButton("images/no.png");
-                no.addActionListener(new ActionListener(){
-                    @Override
-                    public void actionPerformed(ActionEvent e){
-                        System.exit(0);
-                    }
-                
-                });
-                
-            }
-        });
         
-        menu.setSize(1300, 700);
-        Start.setBounds(560, 400, 150, 50);
-        Quit.setBounds(560, 500, 150, 50);
-        title.setBounds(280, 100, 700, 200);
+    }
+    
+    public void buildProfileButton(){
         
-        menu.add(title);
-        menu.add(Start);
-        menu.add(Quit);
-        menu.getContentPane().setBackground(Color.white);
-        menu.setLayout(null);
-        menu.setVisible(true);
-        menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        profileButton = new JButton("Profile");
+        
+        profileButton.addActionListener(new profileButtonListener());
+        
+    }
+    
+    private class profileButtonListener implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            JLabel name;
+            String profile;
+            
+            profile = JOptionPane.showInputDialog("Profile");
+            name = new JLabel(profile);
+            name.setFont(new Font("Arial Black", Font.BOLD, 36));
+            //menu.add(name);
+            name.setBounds(1100, 20, 160, 50);
+            //Profile.setVisible(false);
+            
+        }
     }
     
 }

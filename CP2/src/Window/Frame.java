@@ -1,14 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Window;
+package window;
 
-/**
- *
- * @author carlo_000
- */
-public class Frame {
-    
+/*
+
+
+
+
+*/
+
+import javax.swing.JFrame;                                                                  
+
+public class frame {                                                                         
+        public static void main(String[] args) {                                                 
+                JFrame frame = new JFrame("");  
+                menu menuObject = new menu();
+
+                frame.getContentPane().add(new board());                       
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                               
+                frame.setSize(600, 400);                                                             
+                frame.setResizable(false);                                                         
+                frame.setLocation(20, 50);                                                          
+                frame.setVisible(true);                                                            
+
+                //frame.add(menuObject.buildProfileButton);
+                //frame.add(menuObject.name);
+                
+                int frameWidth  = frame.getContentPane().getWidth();
+                int frameHeight  = frame.getContentPane().getHeight();
+        }
 }

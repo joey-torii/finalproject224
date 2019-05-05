@@ -1,57 +1,73 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Window;
+package window;
 
-import java.awt.*;
+import java.awt.*;                                                                           
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
+import java.util.Random;
+
 import javax.swing.*;
 
-/**
- *
- * @author carlo_000
- */
 public class board extends JPanel implements ActionListener {
-    player p;
-    Image img;
-    Timer time;
-    
-    public board () {
-        p = new player();
-        addKeyListener(new ActionListener());
-        setFocusable(true);
-        ImageIcon i = new ImageIcon("images/level1(2).png");
-        
-        
-        img = i.getImage();
+    player p;                                                                                
+    Image background, menuBg;                                                                
+    Timer time;                                                                              
+    private menu Menu;
+    private frame Frame;
+    Random ranNum = new Random();
+
+    public static enum STATE {MENU,GAME};
+
+    public static STATE State = STATE.MENU;
+
+    public board() {
+        this.addMouseListener(new mouseInput());
+        p = new player();                                                                    
+        Menu = new menu();
+        addKeyListener(new woah());                                                            
+        setFocusable(true);                                                                                                                          
+        ImageIcon i = new ImageIcon("mmbackground.png");                 
+        menuBg = i.getImage();
+        i = new ImageIcon("background.png");  
+        background = i.getImage();                                                           
+        time = new Timer(20,this);                                                           
+        time.start();        
     }
-    
+
     public void actionPerformed(ActionEvent e){
-        p.move();
-        repaint();
+        p.move();                                                                            
+        repaint();                                                                           
     }
     
-    public void paint(Graphics g){
-        super.paint(g);
-        Graphics2D g2d = (Graphics2D) g;
-        
-        g2d.drawImage(img, 685-p.nx2, 0, null);
-        g2d.drawImage(p.getImage(), p.getX(), p.getY(), null);
-       
-    }
-    
-    private class ActionListener extends KeyAdapter{
-        public void KeyReleased(KeyEvent e){
-            p.keyReleased(e);
+
+    public void paintComponent(Graphics g){                                                 
+        if(State==STATE.GAME){
+            super.paintComponent(g);
+            Graphics2D g2d = (Graphics2D) g;                                            
+            g2d.drawImage(background, -p.nx, 0, null);                                   
+            g2d.drawImage(background, -p.nx2, 0, null);                                 
+            if(-p.nx<-575)                                                              
+                p.nx=-575;                                                              
+            else if(-p.nx>575)                                                         
+                p.nx=575;                                                               
+            if(-p.nx2<-575)                                                           
+                p.nx2=-575;                                                            
+            else if(-p.nx2>575)                                                        
+                p.nx2=575;                                                              
+            g2d.drawImage(p.getImage(), p.getX(), p.getY(), null);
+            if (p.nx2)
+        } 
+        else{
+            g.drawImage(menuBg, 0, 0, null);
+            menu.render(g);
         }
-        public void keyPressed(KeyEvent e){
-            p.keyPressed(e);
+    }
+
+    private class woah extends KeyAdapter {                                                   
+        public void keyPressed(KeyEvent e) {                                                 
+            p.keyPressed(e);                                                                 
+        }
+          
+        public void keyReleased(KeyEvent e) {                                              
+            p.keyReleased(e);                                                                
         }
     }
 }
