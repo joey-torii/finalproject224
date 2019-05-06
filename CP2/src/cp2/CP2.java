@@ -1,7 +1,7 @@
 package cp2;
 
 
-import Window.menu;
+import Window.*;
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
 
@@ -22,7 +22,7 @@ public class CP2 extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         */
-        menu.main(null);
+        Frame.main(null);
     }
    
     

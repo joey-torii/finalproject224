@@ -1,4 +1,4 @@
-package window;
+package Window;
 
 /*
 
@@ -9,7 +9,7 @@ package window;
 
 import javax.swing.JFrame;                                                                  
 
-public class frame {                                                                         
+public class Frame {                                                                         
         public static void main(String[] args) {                                                 
                 JFrame frame = new JFrame("");  
                 menu menuObject = new menu();

@@ -1,4 +1,4 @@
-package window;
+package Window;
 
 /*
 
@@ -7,11 +7,13 @@ package window;
 
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 
 public class player {
-    int x, dx, y, nx, nx2, distanceTraveled;                                                    
+    int x, dx, y, nx, nx2, distanceTraveled;  
+    protected int Width, Height;
     Image player;                                                                              
     ImageIcon playerFacingLeft = new     ImageIcon("character2.png");  
     ImageIcon playerFacingRight = new     ImageIcon("character2.png");
@@ -72,7 +74,16 @@ public class player {
         
     public Image getImage(){            // gets image of player at a certain point
         return player; 
-    }                                               
+    }
+    
+    public void getImageDimensions(){
+        Width = player.getWidth(null);
+        Height = player.getHeight(null);
+    }
+    
+    public Rectangle getBounds(){
+        return new Rectangle(x,y,Width,Height);
+    }
 
     public void keyPressed(KeyEvent e) {       // if A is pressed, move the player left                                              
         int key = e.getKeyCode();                                                            
@@ -81,9 +92,12 @@ public class player {
             if(distanceTraveled<104)dx=-3;else dx=-2;
         }
 
-        if(key == KeyEvent.VK_D) {             // if D is presse, move the player right                               
+        if(key == KeyEvent.VK_D) {             // if D is pressed, move the player right                               
             player = playerFacingRight.getImage();                                           
             if(distanceTraveled<104)dx=3;else dx=2;
+        }
+        if(key == KeyEvent.VK_A){
+            
         }
     }
 

@@ -1,4 +1,4 @@
-package window;
+package Window;
 
 /*
 
@@ -89,5 +89,4 @@ public class menu {
             
         }
     }
-    
 }
